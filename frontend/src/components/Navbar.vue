@@ -20,6 +20,9 @@
         <v-list-item to="/order-form">
           <v-list-item-title>Formularz zamówień</v-list-item-title>
         </v-list-item>
+        <v-list-item to="/admin-panel">
+          <v-list-item-title>Admin Panel</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
   </v-app-bar>

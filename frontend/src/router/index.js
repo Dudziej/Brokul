@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Products from '../views/ProductsList.vue'
 // import SalesReport from '../views/SalesReport.vue'
 // import OrderForm from '../views/OrderForm.vue'
+import AdminPanel from '../views/AdminPanel.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/products',
     name: 'Products',
     component: Products
+  },
+  {
+    path: '/admin-panel',
+    name: 'AdminPanel',
+    component: AdminPanel
   },
   // {
   //   path: '/sales-report',
