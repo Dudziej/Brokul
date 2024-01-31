@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Products from '../views/ProductsList.vue'
 // import SalesReport from '../views/SalesReport.vue'
-// import OrderForm from '../views/OrderForm.vue'
+import OrderForm from '../views/OrderForm.vue'
 import AdminPanel from '../views/AdminPanel.vue'
 
 Vue.use(VueRouter)
@@ -29,11 +29,11 @@ const routes = [
   //   name: 'SalesReport',
   //   component: SalesReport
   // },
-    // {
-  //   path: '/order-form',
-  //   name: 'OrderForm',
-  //   component: OrderForm
-  // },
+    {
+    path: '/order-form',
+    name: 'OrderForm',
+    component: OrderForm
+  },
 ]
 
 const router = new VueRouter({
