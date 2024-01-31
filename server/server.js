@@ -57,7 +57,6 @@ app.get('/customers', async (req, res) => {
 });
 
 const Order = require('./models/Order');
-const Product = require('./models/Product');
 
 // Tworzenie nowego zamówienia
 app.post('/orders', async (req, res) => {
