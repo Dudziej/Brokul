@@ -100,3 +100,39 @@ app.get('/orders', async (req, res) => {
         res.status(500).send(error);
     }
 });
+
+
+// Endpoint do pobierania agregowanych danych sprzedaży produktów
+app.get('/sales', async (req, res) => {
+    try {
+        const orders = await Order.find({}).populate('products.product');
+
+        const salesData = new Map();
+
+        orders.forEach(order => {
+            order.products.forEach(({ product, quantity }) => {
+                if (salesData.has(product._id.toString())) {
+                    let prodData = salesData.get(product._id.toString());
+                    prodData.soldQuantity += quantity;
+                    prodData.totalSales += quantity * product.price;
+                    salesData.set(product._id.toString(), prodData);
+                } else {
+                    salesData.set(product._id.toString(), {
+                        productId: product._id,
+                        name: product.name,
+                        price: product.price,
+                        soldQuantity: quantity,
+                        totalSales: quantity * product.price
+                    });
+                }
+            });
+        });
+
+        const salesArray = Array.from(salesData.values());
+
+        res.send(salesArray);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+

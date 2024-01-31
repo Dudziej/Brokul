@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import products from './product.js'
 import customers from './customer.js'
 import orders from './order.js'
+import sales from './sales.js'
 
 Vue.use(Vuex)
 
@@ -19,5 +20,6 @@ export default new Vuex.Store({
     products,
     customers,
     orders,
+    sales,
   }
 })
