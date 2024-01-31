@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -9,6 +10,7 @@ mongoose.connect('mongodb://localhost:27017/', {
     useUnifiedTopology: true
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -32,6 +34,17 @@ app.post('/products', async (req, res) => {
         res.status(400).send(error);
     }
 });
+
+// Pobieranie listy produktów
+app.get('/products', async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.send(products);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 
 const Customer = require('./models/Customer');
 
