@@ -8,6 +8,7 @@
 
     <v-btn color="primary" class="nav-button" to="/products">Produkty</v-btn>
     <v-btn color="primary" class="nav-button" to="/sales-report">Raport sprzedaży</v-btn>
+    <v-btn color="primary" class="nav-button" to="/order-form">Formularz zamówień</v-btn>
   </v-app-bar>
 </template>
 

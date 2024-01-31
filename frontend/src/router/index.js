@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Products from '../views/ProductsList.vue'
 // import SalesReport from '../views/SalesReport.vue'
+// import OrderForm from '../views/OrderForm.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
   //   path: '/sales-report',
   //   name: 'SalesReport',
   //   component: SalesReport
+  // },
+    // {
+  //   path: '/order-form',
+  //   name: 'OrderForm',
+  //   component: OrderForm
   // },
 ]
 
