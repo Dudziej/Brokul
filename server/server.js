@@ -35,15 +35,39 @@ app.post('/products', async (req, res) => {
     }
 });
 
-// Pobieranie listy produktów
+// Pobieranie listy aktywnych produktów
 app.get('/products', async (req, res) => {
     try {
-        const products = await Product.find({});
+        const products = await Product.find({ isActive: true });
         res.send(products);
     } catch (error) {
         res.status(500).send(error);
     }
 });
+
+// Edycja istniejącego produktu
+app.put('/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updateData = req.body;
+        const product = await Product.findByIdAndUpdate(id, updateData, { new: true });
+        res.send(product);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+// Usuwanie istniejącego produktu
+app.delete('/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndUpdate(id, { isActive: false }, { new: true });
+        res.send(product);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 
 
 const Customer = require('./models/Customer');
@@ -74,22 +98,34 @@ const Order = require('./models/Order');
 // Tworzenie nowego zamówienia
 app.post('/orders', async (req, res) => {
     try {
-        const order = new Order(req.body);
+        const orderData = req.body;
 
-        // Obliczanie łącznej kwoty zamówienia
         let totalPrice = 0;
-        for (const item of order.products) {
+        const productsDetails = await Promise.all(orderData.products.map(async (item) => {
             const product = await Product.findById(item.product);
             totalPrice += item.quantity * product.price;
-        }
-        order.totalPrice = totalPrice;
+            return {
+                product: item.product,
+                name: product.name,
+                price: product.price,
+                quantity: item.quantity
+            };
+        }));
+
+        const order = new Order({
+            ...orderData,
+            products: productsDetails,
+            totalPrice: totalPrice
+        });
 
         await order.save();
         res.status(201).send(order);
     } catch (error) {
+        console.log(error);
         res.status(400).send(error);
     }
 });
+
 
 // Pobieranie listy zamówień
 app.get('/orders', async (req, res) => {
