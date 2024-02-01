@@ -19,6 +19,10 @@ const actions = {
       console.error('Error fetching sales data:', error);
     }
   },
+  
+  resetSalesData({ commit }) {
+    commit('SET_SALES_DATA', []); 
+  },
 };
 
 const mutations = {

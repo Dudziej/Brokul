@@ -163,7 +163,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('sales', ['fetchSalesData']),
+    ...mapActions('sales', ['fetchSalesData', 'resetSalesData']),
     ...mapActions('customers', ['fetchCustomers']),
 
     async generateReport() {
@@ -209,10 +209,9 @@ export default {
       this.dateRange.start = null;
       this.dateRange.end = null;
       this.selectedCustomer = null;
-      this.salesData = [];
       this.chartData = null;
       this.chartDataKey++;
-      this.$store.commit('sales/SET_SALES_DATA', []);
+      this.resetSalesData();
     },
 
     formatDate(date) {
