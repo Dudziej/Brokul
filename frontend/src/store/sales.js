@@ -5,9 +5,14 @@ const state = {
 };
 
 const actions = {
-  async fetchSalesData({ commit }) {
+  async fetchSalesData({ commit }, { startDate, endDate } = {}) {
+    let url = 'http://localhost:3000/sales';
+    if (startDate && endDate) {
+      url += `?startDate=${startDate}&endDate=${endDate}`;
+    }
+    
     try {
-      const response = await axios.get('http://localhost:3000/sales');
+      const response = await axios.get(url);
       commit('SET_SALES_DATA', response.data);
     } catch (error) {
       console.error('Error fetching sales data:', error);

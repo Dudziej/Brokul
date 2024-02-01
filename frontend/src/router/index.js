@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Products from '../views/ProductsList.vue'
-// import SalesReport from '../views/SalesReport.vue'
+import SalesReport from '../views/SalesReport.vue'
 import OrderForm from '../views/OrderForm.vue'
 import AdminPanel from '../views/AdminPanel.vue'
 
@@ -24,11 +24,11 @@ const routes = [
     name: 'AdminPanel',
     component: AdminPanel
   },
-  // {
-  //   path: '/sales-report',
-  //   name: 'SalesReport',
-  //   component: SalesReport
-  // },
+  {
+    path: '/sales-report',
+    name: 'SalesReport',
+    component: SalesReport
+  },
     {
     path: '/order-form',
     name: 'OrderForm',
