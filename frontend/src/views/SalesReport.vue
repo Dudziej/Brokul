@@ -72,8 +72,11 @@
               :headers="reportHeaders"
               :items="salesData"
               :items-per-page="5"
-              class="elevation-1"
-            ></v-data-table>
+              class="elevation-1">
+                <template v-slot:[`item.totalSales`]="{ item }">
+                  {{ item.totalSales | currency }}
+                </template>
+            </v-data-table>
             <v-divider></v-divider>
             <div class="text-right pa-4">
               <span><strong>Łączna ilość:</strong> {{ totalQuantity }}</span>
