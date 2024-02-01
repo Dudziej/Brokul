@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:3000';
 
+const getters = {
+  customers: state => state.customers,
+};
+
 export default {
   namespaced: true,
   state: {
@@ -30,4 +34,5 @@ export default {
       }
     },
   },
+  getters,
 };

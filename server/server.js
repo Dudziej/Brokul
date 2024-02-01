@@ -101,43 +101,63 @@ app.get('/orders', async (req, res) => {
     }
 });
 
-// Endpoint do pobierania agregowanych danych sprzedaży produktów w określonym zakresie dat
+// Endpoint do pobierania agregowanych danych sprzedaży produktów w określonym zakresie dat oraz klientów
 app.get('/sales', async (req, res) => {
     try {
-        const { startDate, endDate } = req.query;
+        const { startDate, endDate, customerId } = req.query;
 
-        const dateFilter = {};
+        const filters = {};
         if (startDate && endDate) {
             const start = new Date(startDate);
             const end = new Date(endDate);
             end.setDate(end.getDate() + 1);
-            dateFilter.date = { $gte: start, $lt: end };
+            filters.date = { $gte: start, $lt: end };
+        }
+        if (customerId) {
+            filters.customer = customerId;
         }
 
-        const orders = await Order.find(dateFilter).populate('products.product');
+        const orders = await Order.find(filters).populate({
+            path: 'products.product',
+            model: 'Product'
+        }).populate({
+            path: 'customer',
+            model: 'Customer'
+        });
 
         const salesData = new Map();
         orders.forEach(order => {
             order.products.forEach(({ product, quantity }) => {
-                const salesInfo = salesData.get(product._id.toString()) || {
-                    productId: product._id,
+                const productIdString = product._id.toString();
+                const productData = salesData.get(productIdString) || {
+                    productId: productIdString,
                     name: product.name,
                     price: product.price,
                     soldQuantity: 0,
-                    totalSales: 0
+                    totalSales: 0,
+                    customerNames: new Set() // Używamy Set, aby przechowywać unikalne nazwy
                 };
-                salesInfo.soldQuantity += quantity;
-                salesInfo.totalSales += quantity * product.price;
-                salesData.set(product._id.toString(), salesInfo);
+                productData.soldQuantity += quantity;
+                productData.totalSales += quantity * product.price;
+                if (order.customer) {
+                    productData.customerNames.add(order.customer.name);
+                }
+                salesData.set(productIdString, productData);
             });
         });
 
-        const salesArray = Array.from(salesData.values());
+        const salesArray = Array.from(salesData.values()).map(sale => ({
+            ...sale,
+            customerNames: Array.from(sale.customerNames) // Konwersja Set na Array
+        }));
+
         res.send(salesArray);
     } catch (error) {
         res.status(500).send(error);
     }
 });
+
+
 
 
 
