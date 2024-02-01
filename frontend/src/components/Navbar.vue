@@ -9,7 +9,6 @@
       <template v-slot:activator="{ on, attrs }">
           <v-icon dark class="nav-button" v-bind="attrs" v-on="on">mdi-menu</v-icon>
       </template>
-
       <v-list>
         <v-list-item to="/products">
           <v-list-item-title>Produkty</v-list-item-title>
@@ -30,15 +29,8 @@
 
 <script>
 
-
 export default {
   name: 'NavbarComponent'
 }
 
 </script>
-
-<style>
-.nav-button {
-  margin-left: 10px;
-}
-</style>

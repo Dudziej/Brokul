@@ -135,7 +135,7 @@ app.get('/sales', async (req, res) => {
                     price: product.price,
                     soldQuantity: 0,
                     totalSales: 0,
-                    customerNames: new Set() // Używamy Set, aby przechowywać unikalne nazwy
+                    customerNames: new Set()
                 };
                 productData.soldQuantity += quantity;
                 productData.totalSales += quantity * product.price;
@@ -148,7 +148,7 @@ app.get('/sales', async (req, res) => {
 
         const salesArray = Array.from(salesData.values()).map(sale => ({
             ...sale,
-            customerNames: Array.from(sale.customerNames) // Konwersja Set na Array
+            customerNames: Array.from(sale.customerNames)
         }));
 
         res.send(salesArray);

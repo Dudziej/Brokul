@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import products from './product.js'
-import customers from './customer.js'
-import orders from './order.js'
-import sales from './sales.js'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import products from './modules/product.js';
+import customers from './modules/customer.js';
+import orders from './modules/order.js';
+import sales from './modules/sales.js';
 
 Vue.use(Vuex)
 
