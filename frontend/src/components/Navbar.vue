@@ -10,9 +10,9 @@
           <v-icon dark class="nav-button" v-bind="attrs" v-on="on">mdi-menu</v-icon>
       </template>
       <v-list>
-        <v-list-item to="/products">
+        <!-- <v-list-item to="/products">
           <v-list-item-title>Produkty</v-list-item-title>
-        </v-list-item>
+        </v-list-item> -->
         <v-list-item to="/sales-report">
           <v-list-item-title>Raport sprzedaży</v-list-item-title>
         </v-list-item>

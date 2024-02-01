@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-row>
-            <v-col cols="12" md="6">
+        <v-row justify="center">
+            <v-col cols="12" md="4">
                 <v-card>
                     <v-card-title>Dodaj Produkt</v-card-title>
                     <v-card-text>
@@ -29,7 +29,7 @@
                 </v-card>
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="4">
                 <v-card>
                     <v-card-title>Dodaj Klienta</v-card-title>
                     <v-card-text>
@@ -56,14 +56,19 @@
                 </v-card>
             </v-col>
         </v-row>
+        <ProductsList/>
     </v-container>
 </template>
   
 <script>
 import { mapActions } from 'vuex';
+import ProductsList from '@/components/ProductsList.vue';
 
 export default {
     name: 'Admin-Panel',
+    components: {
+        ProductsList,
+    },
     data() {
         return {
             validProduct: false,
