@@ -62,7 +62,10 @@
                 </v-select>
               </v-col>
             </v-row>
-            <v-btn @click="generateReport">Generuj Raport</v-btn>
+            <v-card-actions>
+              <v-btn color="primary" @click="generateReport">Generuj Raport</v-btn>
+              <v-btn color="error" @click="resetReport">Resetuj Raport</v-btn>
+            </v-card-actions>
           </v-card-text>
           <v-card-text>
             <v-data-table :headers="reportHeaders"
@@ -200,6 +203,16 @@ export default {
         colors.push(color);
       }
       return colors;
+    },
+
+    resetReport() {
+      this.dateRange.start = null;
+      this.dateRange.end = null;
+      this.selectedCustomer = null;
+      this.salesData = [];
+      this.chartData = null;
+      this.chartDataKey++;
+      this.$store.commit('sales/SET_SALES_DATA', []);
     },
 
     formatDate(date) {
