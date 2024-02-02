@@ -7,7 +7,6 @@
             <v-card-title>
               Lista Produktów
               <v-spacer></v-spacer>
-              <!-- Przycisk dodawania produktów -->
               <v-btn icon @click="showAddProductDialog">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
@@ -15,13 +14,11 @@
             <ProductList />
           </v-card>
         </v-col>  
-      <!-- Lista klientów -->
         <v-col md="6">
           <v-card>
             <v-card-title>
               Lista Klientów
               <v-spacer></v-spacer>
-              <!-- Przycisk dodawania klientów -->
               <v-btn icon @click="showAddCustomerDialog">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
@@ -31,12 +28,10 @@
         </v-col>
       </v-row>
   
-      <!-- Dialog dodawania produktu -->
       <AddDialog :dialog="addProductDialog"
                  @update:dialog="addProductDialog = $event" 
                  tag="product"/>
   
-      <!-- Dialog dodawania klienta -->
       <AddDialog :dialog="addCustomerDialog"
                  @update:dialog="addCustomerDialog = $event" 
                  tag="customer"/>
