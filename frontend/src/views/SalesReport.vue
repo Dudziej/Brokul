@@ -65,6 +65,8 @@
             <v-card-actions>
               <v-btn color="primary" @click="generateReport">Generuj Raport</v-btn>
               <v-btn color="error" @click="resetReport">Resetuj Raport</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn @click="exportToCsv"><v-icon>mdi-file-export-outline</v-icon></v-btn>
             </v-card-actions>
           </v-card-text>
           <v-card-text>
@@ -224,6 +226,24 @@ export default {
       }
       return null;
     },
+
+    exportToCsv() {
+      const headers = this.reportHeaders.map(h => `"${h.text}"`).join(',');
+
+      const data = this.salesData.map(row =>
+        this.reportHeaders.map(header => `"${row[header.value]}"`).join(',')
+      );
+
+      const csvContent = `data:text/csv;charset=utf-8,${headers}\n${data.join('\n')}`;
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'raport_sprzedazy.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   },
   mounted() {
     this.fetchCustomers();
