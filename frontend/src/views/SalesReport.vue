@@ -63,10 +63,25 @@
               </v-col>
             </v-row>
             <v-card-actions>
-              <v-btn color="primary" @click="generateReport">Generuj Raport</v-btn>
-              <v-btn color="error" @click="resetReport">Resetuj Raport</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn @click="exportToCsv" :disabled="!canExportReport"><v-icon>mdi-file-export-outline</v-icon></v-btn>
+              <v-row justify="space-between">
+                <v-col cols="12" sm="auto">
+                  <v-btn color="primary" class="mx-1" @click="generateReport">Generuj Raport</v-btn>
+                  <v-btn color="error" class="mx-1" @click="resetReport">Resetuj Raport</v-btn>
+                </v-col>
+                <v-col cols="12" sm="auto" class="d-flex justify-end">
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn v-bind="attrs"
+                             v-on="on"
+                             :disabled="!canExportReport"
+                             @click="exportToCsv">
+                        <v-icon>mdi-file-export-outline</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Eksportuj raport do CSV</span>
+                  </v-tooltip>
+                </v-col>
+              </v-row>
             </v-card-actions>
           </v-card-text>
           <v-card-text>
