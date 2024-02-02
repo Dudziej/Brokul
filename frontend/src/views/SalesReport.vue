@@ -66,7 +66,7 @@
               <v-btn color="primary" @click="generateReport">Generuj Raport</v-btn>
               <v-btn color="error" @click="resetReport">Resetuj Raport</v-btn>
               <v-spacer></v-spacer>
-              <v-btn @click="exportToCsv"><v-icon>mdi-file-export-outline</v-icon></v-btn>
+              <v-btn @click="exportToCsv" :disabled="!canExportReport"><v-icon>mdi-file-export-outline</v-icon></v-btn>
             </v-card-actions>
           </v-card-text>
           <v-card-text>
@@ -117,6 +117,7 @@ export default {
     return {
       menu1: false,
       menu2: false,
+      isReportGenerated: false,
       selectedCustomer: null,
       dateRange: {
         start: null,
@@ -153,8 +154,13 @@ export default {
     totalQuantity() {
       return this.salesData.reduce((sum, item) => sum + item.soldQuantity, 0);
     },
+
     totalPrice() {
       return this.salesData.reduce((sum, item) => sum + item.totalSales, 0);
+    },
+
+    canExportReport() {
+      return this.isReportGenerated && this.salesData && this.salesData.length > 0;
     },
   },
   filters: {
@@ -179,8 +185,10 @@ export default {
       try {
         await this.fetchSalesData({ startDate, endDate, customerId });
         this.generateChartData();
+        this.isReportGenerated = true;
       } catch (error) {
         console.error('Error generating report:', error);
+        this.isReportGenerated = false;
       }
     },
 
@@ -217,6 +225,7 @@ export default {
       this.chartData = null;
       this.chartDataKey++;
       this.resetSalesData();
+      this.isReportGenerated = false;
     },
 
     formatDate(date) {
