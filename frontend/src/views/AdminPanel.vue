@@ -1,142 +1,75 @@
 <template>
     <v-container>
-        <v-row justify="center">
-            <v-col cols="12" md="4">
-                <v-card>
-                    <v-card-title>Dodaj Produkt</v-card-title>
-                    <v-card-text>
-                        <v-form ref="formProduct" 
-                                v-model="validProduct" 
-                                @submit.prevent="submitProduct">
-                            <v-text-field label="Nazwa produktu" 
-                                          v-model="product.name" 
-                                          :rules="[rules.required]"
-                                          required>
-                                        </v-text-field>
-                            <v-text-field label="Cena produktu" 
-                                          v-model="product.price"
-                                          :rules="[rules.required, rules.number]" 
-                                          required 
-                                          type="number">
-                                        </v-text-field>
-                            <v-btn :disabled="!validProduct" 
-                                   type="submit" 
-                                   color="success">
-                                   Dodaj
-                                </v-btn>
-                        </v-form>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-
-            <v-col cols="12" md="4">
-                <v-card>
-                    <v-card-title>Dodaj Klienta</v-card-title>
-                    <v-card-text>
-                        <v-form ref="formCustomer" 
-                                v-model="validCustomer" 
-                                @submit.prevent="submitCustomer">
-                            <v-text-field label="Nazwa organizacji" 
-                                          v-model="customer.name" 
-                                          :rules="[rules.required]"
-                                          required>
-                                        </v-text-field>
-                            <v-text-field label="Adres" 
-                                          v-model="customer.address" 
-                                          :rules="[rules.required]"
-                                          required>
-                                        </v-text-field>
-                            <v-btn :disabled="!validCustomer" 
-                                   type="submit" 
-                                   color="success">
-                                   Dodaj
-                                </v-btn>
-                        </v-form>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-        </v-row>
-        <ProductsList/>
-    </v-container>
-</template>
+      <!-- Lista produktów -->
+      <v-row justify="center">
+        <v-col md="6">
+          <v-card>
+            <v-card-title>
+              Lista Produktów
+              <v-spacer></v-spacer>
+              <!-- Przycisk dodawania produktów -->
+              <v-btn icon @click="showAddProductDialog">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-card-title>
+            <ProductList />
+          </v-card>
+        </v-col>  
+      <!-- Lista klientów -->
+        <v-col md="6">
+          <v-card>
+            <v-card-title>
+              Lista Klientów
+              <v-spacer></v-spacer>
+              <!-- Przycisk dodawania klientów -->
+              <v-btn icon @click="showAddCustomerDialog">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-card-title>
+            <CustomerList />
+          </v-card>
+        </v-col>
+      </v-row>
   
-<script>
-import { mapActions } from 'vuex';
-import ProductsList from '@/components/ProductsList.vue';
+      <!-- Dialog dodawania produktu -->
+      <AddDialog :dialog="addProductDialog"
+                 @update:dialog="addProductDialog = $event" 
+                 tag="product"/>
+  
+      <!-- Dialog dodawania klienta -->
+      <AddDialog :dialog="addCustomerDialog"
+                 @update:dialog="addCustomerDialog = $event" 
+                 tag="customer"/>
 
-export default {
-    name: 'Admin-Panel',
+    </v-container>
+  </template>
+  
+  <script>
+  import ProductList from '../components/ProductsList.vue';
+  import CustomerList from '../components/CustomerList.vue';
+  import AddDialog from '../components/AddDialog.vue';
+  
+  export default {
+    name: 'AdminPanel',
     components: {
-        ProductsList,
+      ProductList,
+      CustomerList,
+      AddDialog,
     },
     data() {
-        return {
-            validProduct: false,
-            product: {
-                name: '',
-                price: null,
-            },
-            validCustomer: false,
-            customer: {
-                name: '',
-                address: '',
-            },
-            validOrder: false,
-            order: {
-                customerId: '',
-                productId: '',
-                quantity: null,
-            },
-            rules: {
-                required: value => !!value || 'Pole wymagane.',
-                number: value => !isNaN(parseFloat(value)) || 'Musi być liczbą.',
-            },
-        };
+      return {
+        addProductDialog: false,
+        addCustomerDialog: false,
+      };
     },
     methods: {
-        ...mapActions('products', ['addProduct']),
-        ...mapActions('customers', ['addCustomer']),
-
-        submitProduct() {
-            if (this.$refs.formProduct.validate()) {
-                this.addProduct({
-                    name: this.product.name,
-                    price: this.product.price,
-                }).then(() => {
-                    alert('Produkt został dodany.');
-                    this.resetForm('formProduct');
-                }).catch(error => {
-                    console.error('Wystąpił błąd:', error);
-                    alert('Nie udało się dodać produktu.');
-                });
-            }
-        },
-
-        submitCustomer() {
-            if (this.$refs.formCustomer.validate()) {
-                this.addCustomer({
-                    name: this.customer.name,
-                    address: this.customer.address,
-                }).then(() => {
-                    alert('Klient został dodany.');
-                    this.resetForm('formCustomer');
-                }).catch(error => {
-                    console.error('Wystąpił błąd:', error);
-                    alert('Nie udało się dodać klienta.');
-                });
-            }
-        },
-
-        resetForm(formRef) {
-            this.$refs[formRef].reset();
-            if (formRef === 'formProduct') {
-                this.validProduct = false;
-                this.product = { name: '', price: null };
-            } else if (formRef === 'formCustomer') {
-                this.validCustomer = false;
-                this.customer = { name: '', address: '' };
-            }
-        },
+      showAddProductDialog() {
+        this.addProductDialog = true;
+      },
+      showAddCustomerDialog() {
+        this.addCustomerDialog = true;
+      },
     },
-};
-</script>
+  };
+  </script>
+  

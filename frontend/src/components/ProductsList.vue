@@ -3,10 +3,6 @@
     <v-row>
       <v-col>
         <v-card>
-          <v-card-title>
-            Lista Produktów
-            <v-spacer></v-spacer>
-          </v-card-title>
           <v-data-table :headers="headers"
                         :items="products"
                         :items-per-page="5"
