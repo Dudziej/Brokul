@@ -6,7 +6,8 @@
           <v-data-table :headers="headers"
                         :items="products"
                         :items-per-page="5"
-                        class="elevation-1">
+                        class="elevation-1"
+                        data-testid="product-list-table">
             <template v-slot:[`item.actions`]="{ item }">
               <v-icon small class="mr-2" @click="startEdit(item)">
                 mdi-pencil
@@ -25,7 +26,8 @@
                             dense
                             single-line
                             @blur="stopEdit(props.item)"
-                            @keyup.enter="stopEdit(props.item)">
+                            @keyup.enter="stopEdit(props.item)"
+                            data-testid="edit-price-textfield">
                 </v-text-field>
             </template>
           </v-data-table>

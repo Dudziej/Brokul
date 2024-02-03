@@ -1,7 +1,8 @@
 <template>
     <v-dialog v-model="localDialog" 
               @keydown.esc="closeDialog" 
-              max-width="400px">
+              max-width="400px"
+              :data-testid="`add-${tag}-dialog`">
       <v-card>
         <v-card-title class="justify-space-between">
           <span>{{ dialogTitle }}</span>
@@ -15,15 +16,18 @@
                   @submit.prevent="submit">
             <div v-if="tag === 'product'">
               <v-text-field label="Nazwa produktu"
+                            name="nazwa prodktu"
                             v-model="product.name"
                             :rules="[rules.required]"
-                            required>
+                            required
+                            data-testid="product-name-input">
                 </v-text-field>
               <v-text-field label="Cena produktu"
                             v-model="product.price"
                             :rules="[rules.required, rules.number]"
                             required
-                            type="number">
+                            type="number"
+                            data-testid="product-price-input">
                 </v-text-field>
             </div>
             <div v-if="tag === 'customer'">
@@ -40,7 +44,8 @@
             </div>
             <v-btn :disabled="!valid" 
                    type="submit" 
-                   color="success">
+                   color="success"
+                   data-testid="submit-button">
               Dodaj
             </v-btn>
           </v-form>

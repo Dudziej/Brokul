@@ -7,7 +7,7 @@
             <v-card-title>
               Lista Produktów
               <v-spacer></v-spacer>
-              <v-btn icon @click="showAddProductDialog">
+              <v-btn icon @click="showAddProductDialog" data-testid="add-product-button">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </v-card-title>
