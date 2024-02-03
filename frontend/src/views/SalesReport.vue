@@ -65,8 +65,8 @@
             <v-card-actions>
               <v-row justify="space-between">
                 <v-col cols="12" sm="auto">
-                  <v-btn color="primary" class="mx-1" @click="generateReport">Generuj Raport</v-btn>
-                  <v-btn color="error" class="mx-1" @click="resetReport">Resetuj Raport</v-btn>
+                  <v-btn color="primary" class="mx-1" @click="generateReport" data-testid="generate-raport-button">Generuj Raport</v-btn>
+                  <v-btn color="error" class="mx-1" @click="resetReport" data-testid="reset-raport-button">Resetuj Raport</v-btn>
                 </v-col>
                 <v-col cols="12" sm="auto" class="d-flex justify-end">
                   <v-tooltip bottom>
