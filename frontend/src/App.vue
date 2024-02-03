@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Navbar/>
-    <v-main>
+    <v-main class="container-background">
       <router-view></router-view>
     </v-main>
     <Footer/>
@@ -20,3 +20,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* Nie dodałem pliku globalnego ze względu na tak małą ilość styli */
+.container-background {
+  background-image: url('~@/assets/brokul_pattern.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+}
+</style>

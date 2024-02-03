@@ -1,13 +1,17 @@
 <template>
-  <v-app-bar app color="grey darken-3" dark>
-    <v-btn color="secondary" class="nav-button" to="/">
-      <v-icon dark>mdi-home</v-icon>
+  <v-app-bar app color="grey darken-3">
+    <v-btn color="secondary" class=" mx-4 nav-button" to="/" icon>
+      <v-img src="@/assets/logo.svg"
+             alt="Logo"
+             max-height="48"
+             contain
+             class="mx-2"/>
     </v-btn>
 
     <v-spacer></v-spacer>
-    <v-menu offset-y>
+    <v-menu offset-y transition="slide-x-transition">
       <template v-slot:activator="{ on, attrs }">
-          <v-icon dark class="nav-button" v-bind="attrs" v-on="on">mdi-menu</v-icon>
+          <v-icon dark v-bind="attrs" v-on="on">mdi-menu</v-icon>
       </template>
       <v-list>
         <v-list-item to="/sales-report">

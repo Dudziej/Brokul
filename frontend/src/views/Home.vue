@@ -1,5 +1,5 @@
 <template>
-    <v-container class="container-background">
+    <v-container>
         <v-row justify="center">
             <v-col cols="12" sm="8" md="6">
                 <v-card class="pa-5" elevation="2">
@@ -30,13 +30,3 @@ export default {
     name: 'Home-View',
 }
 </script>
-
-<style scoped>
-.container-background {
-  background-image: url('~@/assets/OG_Diety_od_Broku_a.jpg');
-  background-size: cover;
-  background-position: center center; 
-  height: 80vh;
-}
-</style>
-
