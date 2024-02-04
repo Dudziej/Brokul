@@ -8,6 +8,14 @@ Aplikacja webowa do generowania raportów sprzedaży produktów dla klientów. U
 - **Backend:** Node.js, Express, Mongoose, MongoDB
 - **Inne:** Vue CLI, Body-Parser, Jest, Cypress
 
+## Funkcjonalności
+
+- Generowanie raportów sprzedaży dla wybranego okresu i/lub klienta w formie tabeli oraz wykresu kołowego.
+- Eksportowanie raportu do pliku CSV.
+- Zarządzanie listą produktów i klientów.
+- Składanie zamówień.
+
+
 ## Wymagania Wstępne
 
 Upewnij się, że masz zainstalowane następujące oprogramowanie:
@@ -69,13 +77,6 @@ Aplikacja powinna być teraz dostępna pod adresem http://localhost:8080.
 1. Uruchom testy e2e:
    ```bash
    npm run test:e2e
-
-## Funkcjonalności
-
-- Generowanie raportów sprzedaży dla wybranego okresu i/lub klienta w formie tabeli oraz wykresu kołowego.
-- Eksportowanie raportu do pliku CSV.
-- Zarządzanie listą produktów i klientów.
-- Składanie zamówień.
 
 ## Autor
 
